@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.20">
+    <root id="1">
+      <ServerVersion>4.4.0</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="admin"/>
+    <schema id="3" parent="1" name="blog-application"/>
+    <schema id="4" parent="1" name="blog-application_test"/>
+    <schema id="5" parent="1" name="config"/>
+    <schema id="6" parent="1" name="local"/>
+    <schema id="7" parent="1" name="tag"/>
+    <schema id="8" parent="1" name="tags"/>
+    <schema id="9" parent="1" name="task"/>
+    <schema id="10" parent="1" name="yuthi"/>
+  </database-model>
+</dataSource>

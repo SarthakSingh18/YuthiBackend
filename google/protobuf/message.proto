@@ -1,0 +1,91 @@
+syntax = "proto3";
+package protobuf;
+import "empty.proto";
+enum CollabAccessType{
+  private = 0;
+  public = 1;
+}
+
+enum CollabParticipantRole{
+  owner = 0;
+  admin = 1;
+  manager = 2;
+  user = 3;
+}
+
+message Participant{
+  string user_id = 1;
+  string name = 2;
+  string profession = 3;
+  string tag_line = 4;
+  string icon_url = 5;
+}
+
+message CollabInfo{
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  CollabAccessType access_type = 4;
+  string icon_url = 5;
+  repeated CollabParticipantRole send_message_roles = 6;
+}
+
+message CollabDetailInfo{
+  string id = 1;
+  string name = 2 ;
+  string description = 3;
+  CollabAccessType access_type = 4;
+  string icon_url = 5;
+  repeated Participant participants = 6;
+  repeated CollabInfo sub_collabs = 7;
+}
+
+
+message UpdateParticipantsRequest{
+  string collab_id = 1;
+  repeated Participant participants = 2;
+}
+
+message UpdateSubCollabsRequest{
+  string collab_id = 1;
+  repeated CollabInfo sub_collabs = 2;
+}
+
+message CollabDetailRequest{
+  string collab_id = 1;
+}
+
+message CollabDetailResponse{
+  CollabDetailInfo collab = 1;
+}
+
+message CollabsListingResponse{
+  CollabInfo collabs = 1;
+}
+
+message CreateCollabRequest{
+  string name = 1;
+  string description = 2;
+  CollabAccessType access_type = 3;
+  string icon_url = 4;
+}
+
+message UpdateCollabInfoRequest{
+  string collab_id = 1;
+  string name = 2;
+  string description = 3;
+  CollabAccessType access_type = 4;
+  string icon_url = 5;
+}
+message Info{
+  int32 status = 1;
+  string error = 2;
+}
+service CollabService {
+ // rpc getAllCollabs(google.protobuf.Empty) returns (CollabsListingResponse);
+  rpc getCollabDetailInfo(CollabDetailRequest) returns (CollabDetailResponse);
+  rpc createCollab(CreateCollabRequest) returns (Info);
+  rpc updateCollabInfo(UpdateCollabInfoRequest) returns (Info);
+  //  rpc updateParticipants(UpdateParticipantsRequest) returns (google.protobuf.Empty);
+  //  rpc updateSubCollabs(UpdateSubCollabsRequest) returns (google.protobuf.Empty);
+}
