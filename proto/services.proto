@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package ="/proto";
+
+import "google/protobuf/empty.proto";
+message Mail{
+  string toEmail = 1;
+  string subject = 2;
+  string body = 3;
+}
+
+service mailService{
+  rpc sendMail(Mail) returns(google.protobuf.Empty);
+}
+
+//Compiling proto file protoc -I ./proto -I D:\goWorkspace\include  --go_out=../ --go-grpc_out=../  ./proto/services.proto
