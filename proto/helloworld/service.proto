@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option go_package = "yuthi.com/helloworld";
+
+import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/empty.proto";
+
+
+// Here is the overall greeting service definition where we define all our endpoints
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+      body: "*"
+    };
+  }
+}
+service HttpBodyExampleService{
+  rpc HelloWorld (google.protobuf.Empty) returns (google.api.HttpBody){
+    option (google.api.http) = {
+      get:"/helloworld"
+    };
+  }
+}
+service Organisation{
+  rpc createOrganisation(organisationRequest) returns(google.api.HttpBody){
+    option (google.api.http) = {
+      post: "/createOrganisation"
+    };
+  }
+}
+// This request message will contain organisation details
+
+message organisationRequest{
+  string name = 1;
+  string desc = 2;
+  string email = 3;
+  string contact = 4;
+  string image = 5;
+  string video = 6;
+}
+
+
+
+
+// The request message containing the user's name
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
